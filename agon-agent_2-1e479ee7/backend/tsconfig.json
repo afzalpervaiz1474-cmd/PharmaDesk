@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "removeComments": true,
+    "types": ["node", "jest"]
+  },
+  "include": ["src", "test"]
+}

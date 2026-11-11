@@ -1,0 +1,32 @@
+LICENCE NOT YET SELECTED
+========================
+
+The maintainer of PharmaDesk has not chosen an open-source licence yet.
+
+This file is a deliberate placeholder. It is NOT a licence and grants no
+rights. Until it is replaced with the text of a real licence, default
+copyright applies: all rights are reserved by the copyright holder, and no
+permission is given to use, copy, modify or distribute this software.
+
+To the maintainer - choose one, then replace this whole file with its full
+official text and update the "license" field in package.json,
+backend/package.json and src-tauri/Cargo.toml, and the Licence section of
+README.md:
+
+  MIT          Short and permissive. Anyone may use the code, including in
+               closed-source products, if they keep the copyright notice.
+
+  Apache-2.0   Permissive like MIT, plus an explicit patent grant and a
+               requirement to state changes.
+
+  GPL-3.0      Copyleft. Anyone distributing a modified version must publish
+               its source under the same licence.
+
+  AGPL-3.0     Like GPL-3.0, and also applies when a modified version is
+               offered to users over a network (relevant to the backend).
+
+Official texts: https://choosealicense.com/licenses/
+
+Note: accepting outside contributions before a licence is chosen makes the
+choice harder later, because each contributor keeps the copyright in their
+own contribution.

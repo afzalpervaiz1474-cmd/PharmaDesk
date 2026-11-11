@@ -1,0 +1,73 @@
+# Continuous integration for PharmaDesk.
+#
+# NOTE: this workflow was written together with the first version of the
+# project and had not been executed when it was committed. Expect to adjust
+# it after its first run.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  desktop-ui:
+    name: Desktop UI (lint, test, build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - run: npm run verify:tauri
+
+  backend:
+    name: Backend (test, build)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+      - run: npm ci
+      # Tests use PGlite (in-process PostgreSQL), so no database service is needed.
+      - run: npm test
+      - run: npm run build
+
+  tauri-shell:
+    name: Tauri shell (cargo check)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Tauri system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev build-essential curl wget file \
+            libxdo-dev libssl-dev libayatana-appindicator3-dev librsvg2-dev
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # tauri::generate_context! needs the built UI at ../dist.
+      - run: npm run build
+      - run: cargo fmt --check
+        working-directory: src-tauri
+      - run: cargo check --locked
+        working-directory: src-tauri

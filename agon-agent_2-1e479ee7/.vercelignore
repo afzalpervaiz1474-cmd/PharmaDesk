@@ -1,0 +1,6 @@
+# The hosted browser preview only needs the UI (src/) and the preview adapter (api/).
+# The real backend and the desktop shell are not deployed there.
+backend
+src-tauri
+scripts
+.github

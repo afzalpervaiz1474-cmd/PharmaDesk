@@ -1,0 +1,19 @@
+[package]
+name = "pharmadesk"
+version = "0.1.0"
+description = "PharmaDesk - offline-first pharmacy management desktop application"
+edition = "2021"
+rust-version = "1.77.2"
+publish = false
+
+[lib]
+# The `_lib` suffix avoids a name clash between the library and the binary on Windows.
+name = "pharmadesk_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-sql = { version = "2", features = ["sqlite"] }
